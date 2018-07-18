@@ -13,6 +13,6 @@ export default [
         ],
         meta: {title: '保捷安快递后台管理'}
     },
-	{path: '/order/checkOrder', component: getViewComponent('/order/checkOrder'),meta: {title: '快递员'}},//
+	{path: '/order/checkOrder', component: getViewComponent('/order/checkOrder'),meta: {title: '快递员揽件'}},//
 	{path: '/login', component: getViewComponent('/common/login'),meta: {title: '登录-保捷安快递后台管理'}}
 ]

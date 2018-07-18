@@ -6,7 +6,6 @@
 				<div slot="header">
 					<el-button @click="editOrder()" style="float: right;" size="small" type="primary">修改订单</el-button>
 					订单详情
-
 				</div>
 				<div class="el-form-item">
 					<div class="infoItem">
@@ -159,6 +158,7 @@
 				dtdFlag:false,
 				goodsList:[],
 				orderDialogForm:{
+					orderNo:'',
 					weight:'',
 					goods:'',
 					dtdFlag:'',
@@ -188,11 +188,10 @@
 						this.order = rs.order;
 						this.tableData = rs.orderDescriptions;
 						this.dialogForm.orderNo=rs.order.orderNo;
+						this.orderDialogForm.orderNo=rs.order.orderNo;
 					}else{
 						this.$message(rs.ret_msg);
 					}
-
-
 				})
 			},
 
@@ -202,16 +201,16 @@
 			},
 			saveOrderDialog(orderDialogForm){
 				let _that = this;
-				if(_that.dtdFlag){
-					_that.orderDialogForm.dtdFlag=1
-				}else{
-					_that.orderDialogForm.dtdFlag=0
-				}
-				console.log(_that.orderDialogForm)
-				this.$refs[orderDialogForm].validate((valid) => {
-					if(valid){
 
-						// orderService.editDes(_that.orderDialogForm).then(rs => {
+				_that.$refs[orderDialogForm].validate((valid) => {
+					if(valid){
+						if(_that.dtdFlag){
+							_that.orderDialogForm.dtdFlag=1
+						}else{
+							_that.orderDialogForm.dtdFlag=0
+						}
+
+						// orderService.edit(_that.orderDialogForm).then(rs => {
 						// 	_that.orderDialogFormVisible = false;
 						// 	if(rs.retCode=='000100'){
 						// 		_that.$message({
