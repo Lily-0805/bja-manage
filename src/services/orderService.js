@@ -14,6 +14,8 @@ export default {
 
 	collect: (data) => http.post('/order/collect-goods', Qs.stringify(data)),//快递员揽件
 
+	goodsList: (data) => http.post('/goods/list', Qs.stringify(data)),//快递员揽件
+
 
 }
 

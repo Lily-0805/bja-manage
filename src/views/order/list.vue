@@ -18,7 +18,7 @@
 
 		<el-table :data="list" stripe style="width: 100%">
 			<el-table-column type="index" label="序号" width="50"></el-table-column>
-			<el-table-column prop="orderNo" label="订单号" width="180"></el-table-column>
+			<el-table-column prop="orderNo" label="订单号" width="130"></el-table-column>
 			<el-table-column prop="expressNo" label="快递单号" width="180"></el-table-column>
 			<el-table-column prop="expressAdminName" label="快递员" width="100" v-if="adminType==1"></el-table-column>
 			<el-table-column prop="" label="寄件人">
@@ -35,9 +35,9 @@
 					<p>{{scope.row.toDetailAddr}}</p>
 				</template>
 			</el-table-column>
-			<el-table-column prop="" label="上门时间" width="300">
+			<el-table-column prop="" label="上门时间" width="160">
 				<template slot-scope="scope">
-					{{scope.row.collectStartTime}}<br />至<br />{{scope.row.collectEndTime}}
+					<p style="text-align:center">{{scope.row.collectStartTime}}<br />至<br />{{scope.row.collectEndTime}}</p>
 				</template>
 			</el-table-column>
 			<el-table-column prop="goods" label="物品" width="80"></el-table-column>

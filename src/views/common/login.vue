@@ -37,6 +37,7 @@
         data () {
             return {
                 formLogin: {
+	                //accountNo: '1000001',
 	                accountNo: '5000002',
                     password: '111111'
                 }

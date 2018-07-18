@@ -65,8 +65,8 @@
 				}
 				orderService.collect({orderNo:this.orderNo}).then(rs => {
 					if(rs.retCode=='000100'){
-						this.list = rs.list
-
+						this.getList()
+						this.$message(rs.ret_msg)
 					}else{
 						this.$message(rs.ret_msg)
 					}
