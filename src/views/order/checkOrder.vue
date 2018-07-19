@@ -52,7 +52,7 @@
 					if(rs.retCode=='000100'){
 						this.list = rs.list
 					}else{
-						this.$message(rs.ret_msg)
+						this.$message(rs.retMsg)
 					}
 				})
 
@@ -66,9 +66,9 @@
 				orderService.collect({orderNo:this.orderNo}).then(rs => {
 					if(rs.retCode=='000100'){
 						this.getList()
-						this.$message(rs.ret_msg)
+						this.$message(rs.retMsg)
 					}else{
-						this.$message(rs.ret_msg)
+						this.$message(rs.retMsg)
 					}
 				})
 			}

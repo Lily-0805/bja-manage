@@ -221,7 +221,7 @@
 								dtdFlag:rs.order.dtdFlag,
 						}
 					}else{
-						this.$message(rs.ret_msg);
+						this.$message(rs.retMsg);
 					}
 				})
 			},
@@ -230,7 +230,7 @@
 					if(rs.retCode=='000100'){
 						this.goodsList=rs.list
 					}else{
-						this.$message(rs.ret_msg);
+						this.$message(rs.retMsg);
 					}
 				})
 			},

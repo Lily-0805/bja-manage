@@ -74,14 +74,14 @@
             savePassword(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-	                    commonService.password({oldPassword:md5(this.form.oldPassword),newPassword:md5(this.form.pass)}).then(rs => {
+	                    commonService.password({oldPassword:md5('@baojiean'+this.form.oldPassword),newPassword:md5('@baojiean'+this.form.pass)}).then(rs => {
                             if(rs.retCode=='000100'){
                                 this.$message({
-                                    message: rs.ret_msg,
+                                    message: rs.retMsg,
                                     type: 'success'
                                 });
                             }else{
-                                this.$message(rs.ret_msg);
+                                this.$message(rs.retMsg);
                             }
                         })
                     } else {

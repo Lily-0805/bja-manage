@@ -154,7 +154,7 @@
 						this.page = rs.page
 						this.totalPage = rs.totalPage
 					}else{
-						this.$message(rs.ret_msg);
+						this.$message(rs.retMsg);
 					}
 				})
 

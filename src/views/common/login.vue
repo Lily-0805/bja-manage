@@ -71,7 +71,7 @@
 
 
                     }else{
-	                    this.$message(rs.ret_msg)
+	                    this.$message(rs.retMsg)
                     }
 
 

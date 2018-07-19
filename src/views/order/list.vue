@@ -102,7 +102,7 @@
 						this.param.page = rs.page=0 ? rs.page : 1
 						this.totalPage = rs.totalPage
 					}else{
-						this.$message(rs.ret_msg)
+						this.$message(rs.retMsg)
 					}
 				})
 
