@@ -79,7 +79,7 @@
 	                auth.removeToken('adminNo')
 	                auth.removeToken('adminType')
                 	this.$router.push({
-		                path: '/login'
+		                path: '/'
 
 	                })
                 })
