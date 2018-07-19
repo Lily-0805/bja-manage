@@ -3,7 +3,8 @@
 const getViewComponent = (path) => (resolve) => require(['@/views' + path + '.vue'], resolve)
 
 export default [
-    {path: '/', component: getViewComponent('/common/index'),
+	{path: '/', component: getViewComponent('/common/login'),meta: {title: '登录-保捷安快递后台管理'}},
+	{path: '/index', component: getViewComponent('/common/index'),
         children:[
 	        {path: '/admin/list', component: getViewComponent('/admin/list'),meta: {title: '用户管理-保捷安快递后台管理'}},//
 	        {path: '/order/list', component: getViewComponent('/order/list'),meta: {title: '订单管理-保捷安快递后台管理'}},//
@@ -14,5 +15,5 @@ export default [
         meta: {title: '保捷安快递后台管理'}
     },
 	{path: '/order/checkOrder', component: getViewComponent('/order/checkOrder'),meta: {title: '快递员揽件'}},//
-	{path: '/login', component: getViewComponent('/common/login'),meta: {title: '登录-保捷安快递后台管理'}}
+
 ]

@@ -65,7 +65,7 @@
 		                    })
 	                    }else {
 		                    this.$router.push({
-			                    path: '/'
+			                    path: '/index'
 		                    })
 	                    }
 
