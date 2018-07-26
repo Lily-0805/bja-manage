@@ -24,15 +24,13 @@
 			<el-table-column prop="" label="寄件人">
 				<template slot-scope="scope">
 					<p>{{scope.row.fromName}} {{scope.row.fromContact}}</p>
-					<p>{{scope.row.fromProvince}}{{scope.row.fromCity}}{{scope.row.fromArea}}</p>
-					<p>{{scope.row.fromDetailAddr}}</p>
+					<p>{{scope.row.fromProvince}}{{scope.row.fromCity}}{{scope.row.fromArea}}{{scope.row.fromDetailAddr}}</p>
 				</template>
 			</el-table-column>
 			<el-table-column prop="" label="收件人">
 				<template slot-scope="scope">
 					<p>{{scope.row.toName}} {{scope.row.toContact}}</p>
-					<p>{{scope.row.toProvince}}{{scope.row.toCity}}{{scope.row.toArea}}</p>
-					<p>{{scope.row.toDetailAddr}}</p>
+					<p>{{scope.row.toProvince}}{{scope.row.toCity}}{{scope.row.toArea}}{{scope.row.toDetailAddr}}</p>
 				</template>
 			</el-table-column>
 			<el-table-column prop="" label="上门时间" width="160">
