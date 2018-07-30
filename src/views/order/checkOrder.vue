@@ -9,7 +9,7 @@
 		<ul class="list">
 			<li v-for="item in list">
 				<p>订单号：{{item.orderNo}}</p>
-				<p>快递单号：{{item.expressNo}}</p>
+				<p>物流单号：{{item.expressNo}}</p>
 				<p>寄件人：{{item.fromName}} {{item.fromContact}}</p>
 				<p>寄件地址：{{item.fromProvince}}{{item.fromCity}}{{item.fromArea}}{{item.fromDetailAddr}}</p>
 				<p>收件人：{{item.toName}} {{item.toContact}}</p>

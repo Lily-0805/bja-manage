@@ -3,7 +3,7 @@
 		<el-container>
 			<el-header>
 				<el-row :gutter="20">
-					<el-col :span="6"><h1>保捷安快递后台管理</h1></el-col>
+					<el-col :span="6"><h1>保捷安物流后台管理</h1></el-col>
 					<el-col :span="6" :offset="12" style="text-align: right">
 						<el-button type="text" class="logout" @click="logout()">退出</el-button>
 					</el-col>

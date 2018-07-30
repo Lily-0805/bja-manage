@@ -90,7 +90,7 @@
 
 				roleList:[
 					{name:'管理员',id:1},
-					{name:'快递员',id:5}
+					{name:'员工',id:5}
 				],
 				passwordPlaceholder:'请输入密码',
 				editFlag:false,
@@ -130,7 +130,7 @@
 				if(row.adminType==1){
 					return '管理员'
 				}else{
-					return '快递员'
+					return '员工'
 				}
 			},
 			formatterDisable(row,cellValue){

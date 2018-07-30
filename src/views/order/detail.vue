@@ -13,7 +13,7 @@
 						<span class="infoValue">{{order.orderNo}}</span>
 					</div>
 					<div class="infoItem">
-						<span class="infoName">快递单号：</span>
+						<span class="infoName">物流单号：</span>
 						<span class="infoValue">{{order.expressNo}}</span>
 					</div>
 				</div>
@@ -98,7 +98,7 @@
 			<el-dialog :visible.sync="orderDialogFormVisible" width="400px" @close="closeOrderDialog">
 				<el-form :model="orderDialogForm" :rules="orderRules" label-width="100px" ref="orderDialogForm">
 					<el-form-item label="快递单号" prop="expressNo">
-						<el-input v-model="orderDialogForm.expressNo" auto-complete="off" placeholder="请输入快递单号"></el-input>
+						<el-input v-model="orderDialogForm.expressNo" auto-complete="off" placeholder="请输入物流单号"></el-input>
 					</el-form-item>
 					<el-form-item label="重量" prop="weight">
 						<el-input v-model="orderDialogForm.weight" auto-complete="off" placeholder="请输入重量"></el-input>

@@ -5,11 +5,11 @@
 			<span class="search-text-color">订单号：</span>
 			<el-input v-model="param.orderNo" class="input-with-select">
 			</el-input>
-			<span class="search-text-color">快递单号：</span>
+			<span class="search-text-color">物流单号：</span>
 			<el-input v-model="param.expressNo" class="input-with-select">
 			</el-input>
 			<template v-if="adminType==1">
-				<span class="search-text-color">快递员帐号：</span>
+				<span class="search-text-color">员工账号：</span>
 				<el-input v-model="param.expressAdminNo" class="input-with-select">
 				</el-input>
 			</template>
@@ -19,8 +19,8 @@
 		<el-table :data="list" stripe style="width: 100%">
 			<el-table-column type="index" label="序号" width="50"></el-table-column>
 			<el-table-column prop="orderNo" label="订单号" width="130"></el-table-column>
-			<el-table-column prop="expressNo" label="快递单号" width="180"></el-table-column>
-			<el-table-column prop="expressAdminName" label="快递员" width="100" v-if="adminType==1"></el-table-column>
+			<el-table-column prop="expressNo" label="物流单号" width="180"></el-table-column>
+			<el-table-column prop="expressAdminName" label="员工账号" width="100" v-if="adminType==1"></el-table-column>
 			<el-table-column prop="" label="寄件人">
 				<template slot-scope="scope">
 					<p>{{scope.row.fromName}} {{scope.row.fromContact}}</p>
