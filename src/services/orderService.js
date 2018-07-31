@@ -16,6 +16,7 @@ export default {
 
 	goodsList: (data) => http.post('/goods/list', Qs.stringify(data)),//快递员揽件
 
+	batchUpdate: (data) => http.post('/order/batch-update-status', Qs.stringify(data)),//列表页批量修改状态
 
 }
 

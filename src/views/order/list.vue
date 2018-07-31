@@ -15,8 +15,12 @@
 			</template>
 			<el-button icon="el-icon-search" @click="search()"></el-button>
 		</div>
-
-		<el-table :data="list" stripe style="width: 100%">
+		<el-button type="primary" @click="showDialog()" :disabled="buttonDisabled">修改订单状态</el-button>
+		<el-table :data="list" stripe style="width: 100%" @selection-change="selectionChange">
+			<el-table-column
+				type="selection"
+				width="30">
+			</el-table-column>
 			<el-table-column type="index" label="序号" width="50"></el-table-column>
 			<el-table-column prop="orderNo" label="订单号" width="130"></el-table-column>
 			<el-table-column prop="expressNo" label="物流单号" width="180"></el-table-column>
@@ -58,6 +62,28 @@
 				:total="totalPage">
 			</el-pagination>
 		</div>
+
+
+
+		<el-dialog :visible.sync="dialogFormVisible" width="400px" @close="closeDialog">
+			<el-form :model="dialogForm" :rules="rules" label-width="100px" ref="dialogForm">
+				<el-form-item label="订单状态" prop="orderStatus">
+					<el-select class="search-select" v-model="dialogForm.orderStatus" placeholder="请选择">
+						<el-option
+							v-for="item in statusList"
+							:key="item.id"
+							:label="item.value"
+							:value="item.id">
+						</el-option>
+					</el-select>
+				</el-form-item>
+
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click="dialogFormVisible = false">取 消</el-button>
+				<el-button type="primary" @click="batchUpdate('dialogForm')">确 定</el-button>
+			</div>
+		</el-dialog>
 	</div>
 </template>
 <style>
@@ -79,9 +105,32 @@
 					orderNo:'',
 					expressNo:'',
 					expressAdminNo:''
-				}
+				},
 
+				buttonDisabled:true,
+				orderNos:[],
+
+				statusList:[
+					{"id":0,"value":"未揽件"},
+					{"id":1,"value":"已揽件"},
+					{"id":2,"value":"运输中"},
+					{"id":10,"value":"运达"},
+					{"id":-1,"value":"已取消"},
+				],
+
+				dialogFormVisible:false,
+				dialogForm:{
+					orderStatus:''
+				},
+				rules: {
+					orderStatus: [
+						{required: true, message: '请选择订单状态', trigger: 'blur'}
+					]
+				},
 			}
+
+
+
 		},
 		created () {
 			this.getList()
@@ -104,6 +153,59 @@
 					}
 				})
 
+			},
+
+			//选择框
+			selectionChange(val){
+
+				if(val.length>0){
+					this.buttonDisabled=false;
+					for(let i=0; i<val.length; i++){
+						this.orderNos.push(val[i].orderNo)
+					}
+				}else{
+					this.buttonDisabled=true;
+					this.orderNos=[];
+				}
+			},
+
+			showDialog(){
+				this.dialogFormVisible=true
+			},
+
+			//关闭弹窗清空内容
+			closeDialog(){
+				this.dialogForm.orderStatus=''
+				this.$refs['dialogForm'].clearValidate();
+				this.dialogFormVisible=false
+			},
+
+			//修改订单状态
+			batchUpdate(dialogForm) {
+				let _that = this;
+
+				_that.$refs[dialogForm].validate((valid) => {
+					if(valid){
+						orderService.batchUpdate({orderNos:this.orderNos,orderStatus:this.dialogForm.orderStatus}).then(rs => {
+							if(rs.retCode=='000100'){
+								this.$message({
+									message: rs.retMsg,
+									type: 'success'
+								});
+								setTimeout(function () {
+									_that.param.page=1;
+									_that.dialogFormVisible=false
+									_that.getList();
+								},500)
+							}else{
+								this.$message(rs.retMsg);
+							}
+						})
+					}
+					else{
+						return false;
+					}
+				})
 			},
 
 			search(){

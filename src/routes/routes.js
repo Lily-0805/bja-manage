@@ -10,7 +10,6 @@ export default [
 	        {path: '/order/list', component: getViewComponent('/order/list'),meta: {title: '订单管理-保捷安物流后台管理'}},//
 	        {path: '/order/detail', component: getViewComponent('/order/detail'),meta: {title: '订单详情-保捷安物流后台管理'}},//
 	        {path: '/system/password', component: getViewComponent('/system/password'),meta: {title: '修改-保捷安物流后台管理'}},//
-
         ],
         meta: {title: '保捷安物流后台管理'}
     },
