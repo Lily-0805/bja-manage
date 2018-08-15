@@ -14,8 +14,8 @@
 				<el-aside v-bind:style="{height:asideHeight}">
 					<el-menu :default-active="navselected" router @select="menuselct" mode="vertical" theme="dark" unique-opened>
 						<el-submenu index="/admin" v-if="adminType==1">
-							<template slot="title">用户管理</template>
-							<el-menu-item index="/admin/list" key="/admin/list">用户列表</el-menu-item>
+							<template slot="title">员工管理</template>
+							<el-menu-item index="/admin/list" key="/admin/list">员工列表</el-menu-item>
 						</el-submenu>
 						<el-submenu index="/order">
 							<template slot="title">订单管理</template>
