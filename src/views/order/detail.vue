@@ -84,7 +84,7 @@
 			</el-table>
 
 			<el-dialog :visible.sync="dialogFormVisible" width="400px" @close="closeDialog">
-				<el-form :model="dialogForm" :rules="rules" label-width="100px" ref="dialogForm">
+				<el-form :model="dialogForm" :rules="rules" label-width="100px" ref="dialogForm" @submit.native.prevent>
 					<el-form-item label="描述" prop="description">
 						<el-input v-model="dialogForm.description" auto-complete="off" placeholder="请输入描述详情"></el-input>
 					</el-form-item>
@@ -95,7 +95,8 @@
 					<el-button type="primary" @click="saveDialog('dialogForm')">确 定</el-button>
 				</div>
 			</el-dialog>
-			<el-dialog :visible.sync="orderDialogFormVisible" width="400px" @close="closeOrderDialog">
+
+			<el-dialog :visible.sync="orderDialogFormVisible" width="400px" @close="closeOrderDialog" @submit.native.prevent>
 				<el-form :model="orderDialogForm" :rules="orderRules" label-width="100px" ref="orderDialogForm">
 					<el-form-item label="快递单号" prop="expressNo">
 						<el-input v-model="orderDialogForm.expressNo" auto-complete="off" placeholder="请输入物流单号"></el-input>
@@ -214,11 +215,11 @@
 
 						this.orderDialogForm={
 							orderNo:rs.order.orderNo,
-								expressNo:rs.order.expressNo,
-								weight:rs.order.weight,
-								goods:rs.order.goods,
-								orderStatus:rs.order.orderStatus,
-								dtdFlag:rs.order.dtdFlag,
+							expressNo:rs.order.expressNo,
+							weight:rs.order.weight,
+							goods:rs.order.goods,
+							orderStatus:rs.order.orderStatus,
+							dtdFlag:rs.order.dtdFlag,
 						}
 					}else{
 						this.$message(rs.retMsg);
@@ -304,9 +305,9 @@
 			},
 
 			//保存
-			saveDialog(dialogForm){
+			saveDialog(form){
 				let _that = this;
-				this.$refs[dialogForm].validate((valid) => {
+				this.$refs[form].validate((valid) => {
 					if(valid){
 						if(_that.editFlag){
 							orderService.editDes(_that.dialogForm).then(rs => {
