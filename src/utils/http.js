@@ -30,7 +30,7 @@ http.interceptors.response.use(
 	        auth.removeToken('adminNo')
 
 	        router.push({
-		        path: '/login'
+		        path: '/'
 
 	        })
             return

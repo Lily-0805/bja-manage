@@ -1,6 +1,6 @@
 <template>
 	<div class="orderDetail">
-		<template v-if="adminType==1">
+		<template v-if="adminType==1 || adminType==2">
 			<el-button @click="cancel()" class="cancel">返回</el-button>
 			<el-card class="box-card" shadow="never">
 				<div slot="header">

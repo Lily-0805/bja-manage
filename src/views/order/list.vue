@@ -60,7 +60,7 @@
 				</template>
 			</el-table-column>
 
-			<el-table-column label="操作"width="100" v-if="adminType==1">
+			<el-table-column label="操作"width="100" v-if="adminType==1 || adminType==2">
 				<template slot-scope="scope">
 					<el-button type="text" size="small" @click="detail(scope.row.orderNo)">查看</el-button>
 				</template>
@@ -152,8 +152,15 @@
 
 		},
 		created () {
-			this.getList()
+
 			this.adminType=auth.getToken('adminType');
+			var today =new Date();
+			today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+			this.param.searchStartTime=today;
+			this.param.searchEndTime=today;
+			this.rangeDate=[today,today];
+
+			this.getList()
 		},
 		methods:{
 			//分页

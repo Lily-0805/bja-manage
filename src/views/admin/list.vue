@@ -17,7 +17,8 @@
 				<el-table-column prop="adminNo" label="帐号" width="180"></el-table-column>
 				<el-table-column prop="phone" label="手机号" width="180"></el-table-column>
 				<el-table-column prop="email" label="邮箱" width="180"></el-table-column>
-				<el-table-column prop="adminType" :formatter="formatterType" label="角色" width="180"></el-table-column>
+				<el-table-column prop="adminTypeValue" label="角色" width="180"></el-table-column>
+				<el-table-column prop="areaValue" label="区域" width="180"></el-table-column>
 				<el-table-column prop="disableFlag" :formatter="formatterDisable" label="使用状态" width="180"></el-table-column>
 				<el-table-column prop="createTime" label="创建时间" width="180"></el-table-column>
 
@@ -57,6 +58,11 @@
 							<el-option v-for="item in roleList" :key="item.id" :label="item.name" :value="item.id"></el-option>
 						</el-select>
 					</el-form-item>
+					<el-form-item label="地区" prop="area" v-if="dialogForm.adminType==2">
+						<el-select v-model="dialogForm.area" placeholder="请选择地区">
+							<el-option v-for="item in areaList" :key="item.value" :label="item.value" :value="item.key"></el-option>
+						</el-select>
+					</el-form-item>
 					<el-form-item label="禁用" v-if="editFlag">
 						<el-switch v-model="bandFlag"></el-switch>
 					</el-form-item>
@@ -90,9 +96,10 @@
 
 				roleList:[
 					{name:'管理员',id:1},
-					{name:'分区管理员',id:2},
+					{name:'区域管理员',id:2},
 					{name:'员工',id:5}
 				],
+				areaList:[],
 				passwordPlaceholder:'请输入密码',
 				editFlag:false,
 				bandFlag:false,
@@ -104,6 +111,7 @@
 					phone:'',
 					password:'',
 					adminName:'',
+					area:'',
 					email:'',
 					disableFlag:''
 				},
@@ -118,22 +126,19 @@
 					adminType: [
 						{required: true, message: '请选择角色', trigger: 'blur'}
 					],
+					area: [
+						{required: true, message: '请选择地区', trigger: 'blur'}
+					],
 				},
 			}
 		},
 		created () {
-
 			this.getList('',1)
 			this.adminType=auth.getToken('adminType');
+			this.getArea()
 		},
 		methods:{
-			formatterType(row,cellValue){
-				if(row.adminType==1){
-					return '管理员'
-				}else{
-					return '员工'
-				}
-			},
+
 			formatterDisable(row,cellValue){
 				if(row.disableFlag==1){
 					return '已禁用'
@@ -161,6 +166,15 @@
 
 			},
 
+			getArea(){
+				adminService.adminAreaList().then(rs => {
+					if(rs.retCode=='000100'){
+						this.areaList = rs.areas
+					}else{
+						this.$message(rs.retMsg);
+					}
+				})
+			},
 
 			//新增
 			add(){
@@ -171,25 +185,26 @@
 			},
 			//编辑
 			edit(row){
-				console.log(row);
-					this.dialogFormVisible = true;
-					this.dialogForm={
-						adminNo:row.adminNo,
-						adminType:row.adminType,
-						phone:row.phone,
-						password:'',
-						adminName:row.adminName,
-						email:row.email,
-						disableFlag:row.disableFlag
-					};
-					if(this.dialogForm.disableFlag==1){
-						this.bandFlag=true;
-					}else{
-						this.bandFlag=false;
-					}
-					this.passwordPlaceholder='密码不修改请留空'
-					this.rules.password=[];
-					this.editFlag=true;
+				this.dialogFormVisible = true;
+				this.dialogForm={
+					adminNo:row.adminNo,
+					adminType:row.adminType,
+					area:row.area,
+					phone:row.phone,
+					password:'',
+					adminName:row.adminName,
+					email:row.email,
+					disableFlag:row.disableFlag
+				};
+				if(this.dialogForm.disableFlag==1){
+					this.bandFlag=true;
+				}else{
+					this.bandFlag=false;
+				}
+				this.passwordPlaceholder='密码不修改请留空'
+				this.rules.password=[];
+				this.editFlag=true;
+
 
 			},
 			//关闭弹窗清空内容
