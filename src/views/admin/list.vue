@@ -90,6 +90,7 @@
 
 				roleList:[
 					{name:'管理员',id:1},
+					{name:'分区管理员',id:2},
 					{name:'员工',id:5}
 				],
 				passwordPlaceholder:'请输入密码',
