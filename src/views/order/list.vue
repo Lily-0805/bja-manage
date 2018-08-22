@@ -13,7 +13,17 @@
 				<el-input v-model="param.expressAdminNo" class="input-with-select">
 				</el-input>
 			</template>
-			<el-button icon="el-icon-search" @click="search()"></el-button>
+			<span class="search-text-color">制单时间：</span>
+			<el-date-picker
+				type="daterange"
+				v-model="rangeDate"
+				@change="changeDate"
+				value-format="yyyy-MM-dd"
+				range-separator="至"
+				start-placeholder="开始日期"
+				end-placeholder="结束日期">
+			</el-date-picker>
+			<el-button icon="el-icon-search" @click="search()" style="margin-left: 50px;"></el-button>
 		</div>
 		<el-button type="primary" @click="showDialog()" :disabled="buttonDisabled">修改订单状态</el-button>
 		<el-table :data="list" stripe style="width: 100%" @selection-change="selectionChange">
@@ -37,14 +47,18 @@
 					<p>{{scope.row.toProvince}}{{scope.row.toCity}}{{scope.row.toArea}}{{scope.row.toDetailAddr}}</p>
 				</template>
 			</el-table-column>
-			<el-table-column prop="" label="上门时间" width="160">
+			<el-table-column prop="collectTime" label="上门时间" width="160">
+
+			</el-table-column>
+			<el-table-column prop="goods" label="物品" width="100"></el-table-column>
+			<el-table-column prop="weight" label="重量(kg)" width="80"></el-table-column>
+			<el-table-column prop="orderStatusValue" label="状态" width="80">
 				<template slot-scope="scope">
-					<p style="text-align:center">{{scope.row.collectStartTime}}<br />至<br />{{scope.row.collectEndTime}}</p>
+					<span v-if="scope.row.orderStatus==1" style="color: mediumspringgreen">{{scope.row.orderStatusValue}}</span>
+					<span v-else-if="scope.row.orderStatus==0" style="color: red">{{scope.row.orderStatusValue}}</span>
+					<span v-else>{{scope.row.orderStatusValue}}</span>
 				</template>
 			</el-table-column>
-			<el-table-column prop="goods" label="物品" width="80"></el-table-column>
-			<el-table-column prop="weight" label="重量(kg)" width="80"></el-table-column>
-			<el-table-column prop="orderStatusValue" label="状态" width="80"></el-table-column>
 
 			<el-table-column label="操作"width="100" v-if="adminType==1">
 				<template slot-scope="scope">
@@ -104,9 +118,14 @@
 					page:1,
 					orderNo:'',
 					expressNo:'',
-					expressAdminNo:''
+					expressAdminNo:'',
+					showCanceldOrder:0,
+					searchStartTime:'',
+					searchEndTime:''
 				},
 
+
+				rangeDate:'',
 				buttonDisabled:true,
 				orderNos:[],
 
@@ -211,6 +230,18 @@
 			search(){
 				this.param.page=1
 				this.getList();
+			},
+
+			changeDate(value){
+				console.log(value)
+				if(value==null){
+					this.param.searchStartTime='';
+					this.param.searchEndTime='';
+				}else{
+					this.param.searchStartTime=value[0];
+					this.param.searchEndTime=value[1];
+				}
+
 			},
 
 			detail(orderNo){
