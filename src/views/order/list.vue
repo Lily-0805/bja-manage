@@ -13,6 +13,16 @@
 				<el-input v-model="param.expressAdminNo" class="input-with-select">
 				</el-input>
 			</template>
+			<span class="search-text-color">订单状态：</span>
+			<el-select class="search-select input-with-select" v-model="param.orderStatus" placeholder="请选择">
+				<el-option
+					v-for="(item,index) in statusList"
+					v-if="index+1<statusList.length"
+					:key="item.id"
+					:label="item.value"
+					:value="item.id">
+				</el-option>
+			</el-select>
 			<span class="search-text-color">制单时间：</span>
 			<el-date-picker
 				type="daterange"
@@ -23,6 +33,7 @@
 				start-placeholder="开始日期"
 				end-placeholder="结束日期">
 			</el-date-picker>
+
 			<el-button icon="el-icon-search" @click="search()" style="margin-left: 50px;"></el-button>
 		</div>
 		<el-button type="primary" @click="showDialog()" :disabled="buttonDisabled">修改订单状态</el-button>
@@ -101,7 +112,8 @@
 	</div>
 </template>
 <style>
-.orderList .input-with-select{width: 200px;}
+.orderList .input-with-select{ margin-right: 50px; width: 150px;}
+
 </style>
 <script>
 	import orderService from '@/services/orderService'
@@ -121,7 +133,8 @@
 					expressAdminNo:'',
 					showCanceldOrder:0,
 					searchStartTime:'',
-					searchEndTime:''
+					searchEndTime:'',
+					orderStatus:''
 				},
 
 
