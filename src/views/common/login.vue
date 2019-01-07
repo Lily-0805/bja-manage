@@ -1,7 +1,7 @@
 <template>
 	<div class="login-wrapper">
 		<div class="login-bg">
-			<h1>保捷安物流</h1>
+			<h1>吉丰物流</h1>
 		</div>
 
 		<div class="login">
