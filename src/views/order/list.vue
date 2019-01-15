@@ -63,6 +63,7 @@
 			</el-table-column>
 			<el-table-column prop="goods" label="物品" width="100"></el-table-column>
 			<el-table-column prop="weight" label="重量(kg)" width="80"></el-table-column>
+			<el-table-column prop="cube" label="立方(m³)" width="80"></el-table-column>
 			<el-table-column prop="orderStatusValue" label="状态" width="80">
 				<template slot-scope="scope">
 					<span v-if="scope.row.orderStatus==1" style="color: mediumspringgreen">{{scope.row.orderStatusValue}}</span>
@@ -71,7 +72,7 @@
 				</template>
 			</el-table-column>
 
-			<el-table-column label="操作"width="100" v-if="adminType==1 || adminType==2">
+			<el-table-column label="操作" width="100" v-if="adminType==1 || adminType==2">
 				<template slot-scope="scope">
 					<el-button type="text" size="small" @click="detail(scope.row.orderNo)">查看</el-button>
 				</template>

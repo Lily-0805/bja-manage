@@ -101,8 +101,11 @@
 					<el-form-item label="快递单号" prop="expressNo">
 						<el-input v-model="orderDialogForm.expressNo" auto-complete="off" placeholder="请输入物流单号"></el-input>
 					</el-form-item>
-					<el-form-item label="重量" prop="weight">
+					<el-form-item label="重量">
 						<el-input v-model="orderDialogForm.weight" auto-complete="off" placeholder="请输入重量"></el-input>
+					</el-form-item>
+					<el-form-item label="立方">
+						<el-input v-model="orderDialogForm.cube" auto-complete="off" placeholder="请输入立方"></el-input>
 					</el-form-item>
 					<el-form-item label="物品" prop="goods">
 						<el-select class="search-select" v-model="orderDialogForm.goods" placeholder="请选择">
@@ -182,14 +185,15 @@
 					orderNo:'',
 					expressNo:'',
 					weight:'',
+					cube:'',
 					goods:'',
 					orderStatus:'',
 					dtdFlag:'',
 				},
 				orderRules: {
-					weight: [
-						{required: true, message: '请输入重量', trigger: 'blur'}
-					],
+					// weight: [
+					// 	{required: true, message: '请输入重量', trigger: 'blur'}
+					// ],
 					goods: [
 						{required: true, message: '请选择物品类型', trigger: 'blur'}
 					]
@@ -217,6 +221,7 @@
 							orderNo:rs.order.orderNo,
 							expressNo:rs.order.expressNo,
 							weight:rs.order.weight,
+							cube:rs.order.cube,
 							goods:rs.order.goods,
 							orderStatus:rs.order.orderStatus,
 							dtdFlag:rs.order.dtdFlag,
@@ -249,6 +254,10 @@
 							_that.orderDialogForm.dtdFlag=1
 						}else{
 							_that.orderDialogForm.dtdFlag=0
+						}
+						if(_that.orderDialogForm.weight==""&&_that.orderDialogForm.cube==""){
+							_that.$message("重量或立方不能为空");
+							return;
 						}
 
 						 orderService.edit(_that.orderDialogForm).then(rs => {
